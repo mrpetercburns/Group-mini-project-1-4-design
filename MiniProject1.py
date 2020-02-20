@@ -4,6 +4,7 @@ Created on Thu Feb 20 15:53:37 2020
 
 @author: amand
 """
+
 from random import randint
 import pandas as pd
 
@@ -86,7 +87,7 @@ def select_question(correct_bank):
     return question
 
 def display_q(question):
-    print(question['question'].iloc(0)) #change this
+    print(question['question'].iloc[0]) #change this
     return
 
 #def whose_turn():        
@@ -107,7 +108,7 @@ def give_feedback(valid):
     if valid:
         print('Correct!')
     else:
-        print('Incorrect :()')
+        print('Incorrect')
         
 def remove_question(my_bank, my_q):
     my_bank = my_bank[my_bank.index != my_q.index[0]]
@@ -118,7 +119,6 @@ def remove_question(my_bank, my_q):
 #    return sad
         
 def play_single_turn():
-#    num_of_players = determine_players()
     color = determine_color()
     category = determine_category(color)
     my_bank = get_correct_bank(category,engineering_bank, rosenberg_bank, ru_bank, new_jersey_bank,old_shows_bank,sports_bank)
@@ -131,6 +131,8 @@ def play_single_turn():
     remove_question(my_bank,my_q)
     return valid
 
+#def categorize_score(valid):
+    #here's where we would identify who to allocate points to and for what category
 i=0
 while i < 3:
     points = 0
