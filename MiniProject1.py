@@ -18,7 +18,7 @@ ru_bank = df[df['category'] == 'R-U-RAH-RAH']
 new_jersey_bank = df[df['category'] == 'NeW jErSeY']
 old_shows_bank = df[df['category'] == 'Old TV Shows']
 sports_bank = df[df['category'] == 'Sports']
-scorecard = np.array([[0,0,0,0,0,0],[0,0,0,0,0,0]])
+scorecard = np.array([[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]])
 
 def determine_color():
     #randint must be changed when we use hardware to detect color
@@ -75,11 +75,15 @@ def select_question(correct_bank):
     return question
 
 def determine_player():
-    rand_turn = random.randint(1,2)
+    rand_turn = random.randint(1,4)
     if rand_turn == 1:
         player = 'Player 1'
-    else:
+    elif rand_turn == 2:
         player = 'Player 2'
+    elif rand_turn == 3:
+        player = 'Player 3'
+    else:
+        player = 'Player 4'
     print('It is', player, '\'s turn')
     return player
 
@@ -116,33 +120,58 @@ def keep_score(category, player, valid):
         if category == 'Engineering for Dummies':
             if player == 'Player 1':
                 scorecard[0,0] = scorecard[0,0] + 1
-            else:
+            elif player == 'Player 2':
                 scorecard[1,0] = scorecard[1,0] + 1
+            elif player == 'Player 3':
+                 scorecard[2,0] = scorecard[2,0] + 1
+            else:
+                 scorecard[3,0] = scorecard[3,0] + 1
+               
         elif category == 'Rosenberg Wisdom' :
-            if player == 'Player 1':
+             if player == 'Player 1':
                 scorecard[0,1] = scorecard[0,1] + 1
-            else:
+             elif player == 'Player 2':
                 scorecard[1,1] = scorecard[1,1] + 1
+             elif player == 'Player 3':
+                 scorecard[2,1] = scorecard[2,1] + 1
+             else:
+                 scorecard[3,1] = scorecard[3,1] + 1
         elif category == 'R-U-RAH-RAH':
-            if player == 'Player 1':
+             if player == 'Player 1':
                 scorecard[0,2] = scorecard[0,2] + 1
-            else:
+             elif player == 'Player 2':
                 scorecard[1,2] = scorecard[1,2] + 1
+             elif player == 'Player 3':
+                 scorecard[2,2] = scorecard[2,2] + 1
+             else:
+                 scorecard[3,2] = scorecard[3,2] + 1
         elif category == 'NeW jErSeY':
-            if player == 'Player 1':
+             if player == 'Player 1':
                 scorecard[0,3] = scorecard[0,3] + 1
-            else:
+             elif player == 'Player 2':
                 scorecard[1,3] = scorecard[1,3] + 1
+             elif player == 'Player 3':
+                 scorecard[2,3] = scorecard[2,3] + 1
+             else:
+                 scorecard[3,3] = scorecard[3,3] + 1
         elif category == 'Old TV Shows':
-            if player == 'Player 1':
+             if player == 'Player 1':
                 scorecard[0,4] = scorecard[0,4] + 1
-            else:
+             elif player == 'Player 2':
                 scorecard[1,4] = scorecard[1,4] + 1
+             elif player == 'Player 3':
+                 scorecard[2,4] = scorecard[2,4] + 1
+             else:
+                 scorecard[3,4] = scorecard[3,4] + 1
         else:
-            if player == 'Player 1':
+             if player == 'Player 1':
                 scorecard[0,5] = scorecard[0,5] + 1
-            else:
+             elif player == 'Player 2':
                 scorecard[1,5] = scorecard[1,5] + 1
+             elif player == 'Player 3':
+                 scorecard[2,5] = scorecard[2,5] + 1
+             else:
+                 scorecard[3,5] = scorecard[3,5] + 1
     else:
         scorecard = scorecard
     print(scorecard)
