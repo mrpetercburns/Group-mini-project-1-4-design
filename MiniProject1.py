@@ -101,7 +101,9 @@ def get_guess():
 
 def check_answer(user_guess, question):
     answer = question['answer'].iloc[0]
-    if user_guess == answer:
+    simple_answer = answer.lower()
+    simple_guess = user_guess.lower()
+    if simple_guess == simple_answer:
         return True
     else:
         return False
