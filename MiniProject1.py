@@ -161,12 +161,12 @@ def play_single_turn():
     the_guess = get_guess()
     valid = check_answer(the_guess,my_q)
     give_feedback(valid)
-    score = keep_score(category, player,valid)
+    keep_score(category, player,valid)
     remove_question(my_bank,my_q)
     return valid
 
 i=0
-while i < 5:
+while i < 30:
     points = 0
     score = play_single_turn()
     i += 1
