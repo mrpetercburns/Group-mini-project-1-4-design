@@ -5,7 +5,7 @@ Created on Thu Feb 20 15:53:37 2020
 @author: amand
 """
 
-from random import randint
+import random
 import pandas as pd
 
 df = pd.read_csv('miniqbank.csv')
@@ -30,7 +30,7 @@ sports_bank = df[df['category'] == 'Sports']
 def determine_color():
     #randint must be changed when we use hardware to detect color
     #all color names below are subject to change based on what colors are on the die
-    my_rand = randint(1,6)
+    my_rand = random.randint(1,6)
     if my_rand == 1:
         color = 'blue'
     elif my_rand == 2:
@@ -45,21 +45,23 @@ def determine_color():
         color = 'black'
     return color
 
-def determine_category(color):
-#all color names below are subject to change based on what colors are on the die
-    if color == 'blue':
+
+def determine_category(colore):
+##all color names below are subject to change based on what colors are on the die
+    if colore == 'blue':
         category = 'Engineering for Dummies'
-    elif color == 'red':
+    elif colore == 'red':
         category = 'Rosenberg Wisdom'
-    elif color == 'green':
+    elif colore == 'green':
         category = 'R-U-RAH-RAH'
-    elif color == 'yellow':
+    elif colore == 'yellow':
         category = 'NeW jErSeY'
-    elif color == 'white':
+    elif colore == 'white':
         category = 'Old TV Shows'
     else:
         category = 'Sports'
-        return category
+    print(category)
+    return category
     
 def get_correct_bank(category, engineering_bank, rosenberg_bank, ru_bank, new_jersey_bank,old_shows_bank,sports_bank):
     if category == 'Engineering for Dummies':
@@ -98,11 +100,11 @@ def get_guess():
     return guess
 
 def check_answer(user_guess, question):
-    answer = question['answer'].iloc()
+    answer = question['answer'].iloc[0]
     if user_guess == answer:
-       return True
+        return True
     else:
-       return False
+        return False
    
 def give_feedback(valid):
     if valid:
@@ -114,10 +116,10 @@ def remove_question(my_bank, my_q):
     my_bank = my_bank[my_bank.index != my_q.index[0]]
     return my_bank
 
-#def keep_score():
-    #finish this
-#    return sad
-        
+##def keep_score():
+#    #finish this
+###    return sad
+#        
 def play_single_turn():
     color = determine_color()
     category = determine_category(color)
@@ -132,9 +134,9 @@ def play_single_turn():
     return valid
 
 #def categorize_score(valid):
-    #here's where we would identify who to allocate points to and for what category
+#    #here's where we would identify who to allocate points to and for what category
 i=0
-while i < 3:
+while i < 1:
     points = 0
     score = play_single_turn()
     if score:
