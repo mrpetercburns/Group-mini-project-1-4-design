@@ -8,43 +8,41 @@ while True:
    
     _,  frame = cap.read()
     hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    #red color
-    low_red=np.array([161,155,84])
-    high_red=np.array([179,255,255])
-    red_mask = cv2.inRange(hsv_frame, low_red, high_red)
-    red = cv2.bitwise_and(frame, frame, mask=red_mask)
-    
-    #blue
-    low_blue= np.array([94,80,2])
-    high_blue=np.array([126,255,255])
-    blue_mask=cv2.inRange(hsv_frame, low_blue, high_blue)
-    blue = cv2.bitwise_and(frame, frame, mask=blue_mask)
-    
-       #green
-    low_green= np.array([25,30,30])
-    high_green=np.array([85,255,255])
-    green_mask=cv2.inRange(hsv_frame, low_green, high_green)
-    green = cv2.bitwise_and(frame, frame, mask=green_mask)
-    #yellow
-    low_yellow= np.array([20,100,100])
-    high_yellow=np.array([30,255,255])
-    yellow_mask=cv2.inRange(hsv_frame, low_yellow, high_yellow)
-    yellow = cv2.bitwise_and(frame, frame, mask=yellow_mask)
-    #orange
-    low_orange= np.array([5,50,50])
-    high_orange=np.array([15,255,255])
-    orange_mask=cv2.inRange(hsv_frame, low_orange, high_orange)
-    orange = cv2.bitwise_and(frame, frame, mask=orange_mask)
-     #purple
-    low_purple= np.array([135,30,30])
-    high_purple=np.array([145,255,255])
-    purple_mask=cv2.inRange(hsv_frame, low_purple, high_purple)
-    purple = cv2.bitwise_and(frame, frame, mask=purple_mask)
-    
-    low_white= np.array([0,0,30])
-    high_white=np.array([180,25,255])
-    white_mask=cv2.inRange(hsv_frame, low_white, high_white)
-    white = cv2.bitwise_and(frame, frame, mask=white_mask)
+        #red color
+        low_red=np.array([1,100,60])
+        high_red=np.array([7,255,255])
+        red_mask = cv2.inRange(hsv_frame, low_red, high_red)
+        #red = cv2.bitwise_and(frame, frame, mask=red_mask)
+        #blue
+        low_blue= np.array([94,80,2])
+        high_blue=np.array([120,255,255])
+        blue_mask=cv2.inRange(hsv_frame, low_blue, high_blue)
+        #blue = cv2.bitwise_and(frame, frame, mask=blue_mask)
+        #green
+        low_green= np.array([25,30,30])
+        high_green=np.array([85,255,255])
+        green_mask=cv2.inRange(hsv_frame, low_green, high_green)
+        #green = cv2.bitwise_and(frame, frame, mask=green_mask)
+        #yellow
+        low_yellow= np.array([20,100,100])
+        high_yellow=np.array([30,255,255])
+        yellow_mask=cv2.inRange(hsv_frame, low_yellow, high_yellow)
+        #yellow = cv2.bitwise_and(frame, frame, mask=yellow_mask)
+        #orange
+        low_orange= np.array([8,50,50])
+        high_orange=np.array([15,255,255])
+        orange_mask=cv2.inRange(hsv_frame, low_orange, high_orange)
+        #orange = cv2.bitwise_and(frame, frame, mask=orange_mask)
+        #purple
+        low_purple= np.array([121,30,30])
+        high_purple=np.array([145,255,255])
+        purple_mask=cv2.inRange(hsv_frame, low_purple, high_purple)
+        #purple = cv2.bitwise_and(frame, frame, mask=purple_mask)
+        #white
+        low_white= np.array([0,0,30])
+        high_white=np.array([180,25,255])
+        white_mask=cv2.inRange(hsv_frame, low_white, high_white)
+       # white = cv2.bitwise_and(frame, frame, mask=white_mask)
     #check or other colors
     mask = purple_mask+orange_mask+yellow_mask+green_mask+blue_mask+red_mask
     background=white_mask-(purple_mask+orange_mask+yellow_mask+green_mask+blue_mask+red_mask)
