@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Feb 20 15:53:37 2020
-
-@author: amand
-"""
-
 import random
 import pandas as pd
 import numpy as np
@@ -118,13 +111,14 @@ def remove_question(my_q):
     global new_jersey_bank
     global old_shows_bank
     global sports_bank
-    df = df[my_q.index != my_q.index[0]]
+    df = df[df.index != my_q.index[0]]
     engineering_bank = df[df['category'] == 'Engineering For Dummies']
     rosenberg_bank = df[df['category'] == 'Rosenberg Wisdom']
     ru_bank = df[df['category'] == 'R-U-RAH-RAH']
     new_jersey_bank = df[df['category'] == 'NeW jErSeY']
     old_shows_bank = df[df['category'] == 'Old TV Shows']
     sports_bank = df[df['category'] == 'Sports']
+    print(df)
 
 def keep_score(category, player, valid):
     global scorecard
@@ -203,7 +197,7 @@ def play_single_turn():
     valid = check_answer(the_guess,my_q)
     give_feedback(valid)
     keep_score(category, player,valid)
-    remove_question(my_bank,my_q)
+    remove_question(my_q)
     return valid
 
 i=0
