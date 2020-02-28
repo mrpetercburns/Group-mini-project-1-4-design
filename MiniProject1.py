@@ -110,9 +110,21 @@ def give_feedback(valid):
     else:
         print('Incorrect')
         
-def remove_question(my_bank, my_q):
-    my_bank = my_bank[my_bank.index != my_q.index[0]]
-    return my_bank
+def remove_question(my_q):
+    global df
+    global engineering_bank
+    global rosenberg_bank
+    global ru_bank
+    global new_jersey_bank
+    global old_shows_bank
+    global sports_bank
+    df = df[my_q.index != my_q.index[0]]
+    engineering_bank = df[df['category'] == 'Engineering For Dummies']
+    rosenberg_bank = df[df['category'] == 'Rosenberg Wisdom']
+    ru_bank = df[df['category'] == 'R-U-RAH-RAH']
+    new_jersey_bank = df[df['category'] == 'NeW jErSeY']
+    old_shows_bank = df[df['category'] == 'Old TV Shows']
+    sports_bank = df[df['category'] == 'Sports']
 
 def keep_score(category, player, valid):
     global scorecard
