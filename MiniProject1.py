@@ -43,11 +43,13 @@ def determine_category(colore):
         category = 'NeW jErSeY'
     elif colore == 'white':
         category = 'Old TV Shows'
-    else:
+    elif colore == 'black':
         category = 'Sports'
+    else:
+        colore = colore        
     print('The category is:',category)
     return category
-    
+
 def get_correct_bank(category, engineering_bank, rosenberg_bank, ru_bank, new_jersey_bank,old_shows_bank,sports_bank):
     if category == 'Engineering for Dummies':
         return engineering_bank
@@ -61,8 +63,8 @@ def get_correct_bank(category, engineering_bank, rosenberg_bank, ru_bank, new_je
         return old_shows_bank
     else: 
         return sports_bank
-        
     
+
 def select_question(correct_bank):
     question = correct_bank.sample(n=1)
     return question
@@ -80,8 +82,20 @@ def determine_player():
     print('It is', player, '\'s turn')
     return player
 
+def determine_new_player(player):
+    if player == 'Player 1':
+        newplayer = 'Player 2'
+    elif player == 'Player 2':
+        newplayer = 'Player 3'
+    elif player == 'Player 3':
+        newplayer = 'Player 4'
+    else:
+        newplayer = 'Player 1'
+    print('It is now', newplayer,'\'s turn to answer')
+    return newplayer
+
 def display_q(question):
-    print(question['question'].iloc[0]) #change this
+    print(question['question'].iloc[0]) 
     return
 
 def get_guess():
@@ -99,9 +113,9 @@ def check_answer(user_guess, question):
    
 def give_feedback(valid):
     if valid:
-        print('Correct!')
+        print('\nCorrect!')
     else:
-        print('Incorrect')
+        print('\nIncorrect :( \n')
         
 def remove_question(my_q):
     global df
@@ -118,7 +132,161 @@ def remove_question(my_q):
     new_jersey_bank = df[df['category'] == 'NeW jErSeY']
     old_shows_bank = df[df['category'] == 'Old TV Shows']
     sports_bank = df[df['category'] == 'Sports']
-    print(df)
+
+
+def winning_points():
+    global df
+    global turn
+    global scorecard
+
+    i = 0
+    player1sum,player1list = 0,scorecard[0]
+    player2sum,player2list = 0,scorecard[1]
+    player3sum,player3list = 0,scorecard[2]
+    player4sum,player4list = 0,scorecard[3]
+
+    #if player has answered every category
+    if not 0 in player1list:
+        print('player 1 wins!')
+        turn = 62
+    elif not 0 in player2list:
+        print('player 2 wins!')
+        turn = 62
+    elif not 0 in player3list:
+        print('player 3 wins!')
+        turn = 62
+    elif not 0 in player4list:
+        print('player 4 wins!')
+        turn = 62
+    else:
+        turn = turn
+        
+    while i < 6:
+        player1sum += scorecard[0,i]
+        player2sum += scorecard[1,i]
+        player3sum += scorecard[2,i]
+        player4sum += scorecard[3,i]
+        i += 1
+    # if there every question has been answered then max points win
+    if len(df) == 1: 
+        print('All questions have been answered!')
+        if player1sum > player2sum and player1sum > player3sum and player1sum > player4sum:
+            print('Player 1 wins!')
+            turn = 62
+        elif player2sum > player1sum and player2sum > player3sum and player2sum > player4sum:
+            print('Player 2 wins!')
+            turn = 62
+        elif player3sum > player1sum and player3sum > player2sum and player3sum > player4sum:
+            print('Player 3 wins!')
+            turn = 62
+        elif player4sum > player1sum and player4sum > player2sum and player4sum > player3sum:
+            print('Player 4 wins!')
+            turn = 62
+        else:
+            #if there is a tie, player with the most categories answered wins
+            most_categories(player1list,player2list,player3list,player4list)
+    else:
+        turn = turn
+
+def most_categories(player1list,player2list,player3list,player4list):
+    global turn
+    # the zeroes in the list are the categories unanswered
+    p1_zeroes = np.count_nonzero(player1list==0)
+    p2_zeroes = np.count_nonzero(player2list==0)
+    p3_zeroes = np.count_nonzero(player3list==0)
+    p4_zeroes = np.count_nonzero(player4list==0)
+    if p1_zeroes < p2_zeroes and p1_zeroes < p3_zeroes and p1_zeroes < p4_zeroes:
+        print('Player 1 wins!')
+        turn = 62
+    elif p2_zeroes < p1_zeroes and p2_zeroes < p3_zeroes and p2_zeroes < p4_zeroes:
+        print('Player 2 wins!')
+        turn = 62
+    elif p3_zeroes < p1_zeroes and p3_zeroes < p2_zeroes and p3_zeroes < p4_zeroes:
+        print('Player 3 wins!')
+        turn = 62
+    elif p4_zeroes < p1_zeroes and p4_zeroes < p2_zeroes and p4_zeroes < p3_zeroes:
+        print('Player 4 wins!')
+        turn = 62
+    else:
+        # if players have the same score and same unanswered categories
+        # they break the tie
+        tie_breaker(player1list,player2list,player3list,player4list)
+    
+def tie_breaker(player1,player2,player3,player4):
+    
+    global turn 
+    playersname = ['Player 1','Player 2', 'Player 3','Player 4']
+    playerscore = [player1,player2,player3,player4]
+    highscore = np.amax(playerscore)
+    # location vairable shows which players tied
+    location = np.where(playerscore==highscore)[0] 
+    n_way_tie = len(location)
+    
+    print('******************')
+    print('***Tie Breaker!***')
+    print('******************')
+    print('there is a', n_way_tie, 'way tie!')
+    print('the following order was chosen at random')
+    
+    if n_way_tie == 4:
+
+        firstturn = playersname[random.randint(0,3)]
+        playersname.remove(firstturn)
+    
+        secondturn = playersname[random.randint(0,2)]
+        playersname.remove(secondturn)
+        
+        thirdturn = playersname[random.randint(0,1)]
+        playersname.remove(thirdturn)
+        
+        fourthturn = playersname[0]
+    
+        print(firstturn,'goes first')
+        print(secondturn, 'goes second')
+        print(thirdturn, 'goes third')
+        print(fourthturn,'goes fourth')
+        orderofplayers = [firstturn,secondturn,thirdturn,fourthturn]
+        mini_game(orderofplayers)     
+        
+    elif n_way_tie == 3:
+        firstturn = playersname[random.randint(0,2)]
+        playersname.remove(firstturn)   
+        secondturn = playersname[random.randint(0,1)]
+        playersname.remove(secondturn)       
+        thirdturn = playersname[0]
+        print(firstturn,'goes first')
+        print(secondturn, 'goes second')
+        print(thirdturn, 'goes third')
+        orderofplayers = [firstturn,secondturn,thirdturn] 
+        mini_game(orderofplayers)
+        
+    elif n_way_tie == 2:
+        firstturn = playersname[random.randint[0,1]]
+        playersname.remove(str(firstturn))
+        print(firstturn,'goes first')
+        secondturn = playersname[0]
+        print(secondturn, 'goes second')
+        orderofplayers = [firstturn,secondturn] 
+        mini_game(orderofplayers)
+        
+    else:
+        n_way_tie = n_way_tie
+        
+    return orderofplayers
+
+def mini_game(tiebreakers):
+    
+    if len(tiebreakers) == 4:
+        print(tiebreakers)
+        
+    elif len(tiebreakers) == 3:
+        print(tiebreakers)
+        
+    elif len(tiebreakers) == 2:
+        print(tiebreakers)
+        
+    else:
+        tiebreakers = tiebreakers
 
 def keep_score(category, player, valid):
     global scorecard
@@ -180,28 +348,60 @@ def keep_score(category, player, valid):
                  scorecard[3,5] = scorecard[3,5] + 1
     else:
         scorecard = scorecard
-    print(scorecard)
+    print('\nLeaderboard:')
+    print('Player1:',scorecard[0])
+    print('Player2:',scorecard[1])
+    print('Player3:',scorecard[2])
+    print('Player4:',scorecard[3])
     return scorecard
             
        
 def play_single_turn():
+    global turn
     color = determine_color()
     category = determine_category(color)
     my_bank = get_correct_bank(category,engineering_bank, rosenberg_bank, ru_bank, new_jersey_bank,old_shows_bank,sports_bank)
+    stoploop = 0
+    while my_bank.size == 0 and stoploop==0:
+        color = determine_color()
+        category = determine_category(color)
+        my_bank = get_correct_bank(category,engineering_bank, rosenberg_bank, ru_bank, new_jersey_bank,old_shows_bank,sports_bank)
+        if df.size == 0:
+            stoploop = 1
+        else:
+            stoploop = 0
     my_q = select_question(my_bank)
-
+    
     player = determine_player()
     
     display_q(my_q)
+    print('------------------------------------')
+
     the_guess = get_guess()
     valid = check_answer(the_guess,my_q)
     give_feedback(valid)
-    keep_score(category, player,valid)
+
+    if not valid:
+        newplayer = determine_new_player(player)
+        display_q(my_q)
+        the_guess = get_guess()
+        valid = check_answer(the_guess,my_q)
+        give_feedback(valid)
+        keep_score(category, newplayer,valid)
+        
+    else:
+        keep_score(category, player,valid)
+    
+    print('------------------------------------')
+    print('      ')
+    print('      ')
+    winning_points()
     remove_question(my_q)
     return valid
 
-i=0
-while i < 30:
+turn=0
+while turn < 60:
     points = 0
+    print('*********************   TURN: ' + str(turn) + '   **********************')
     score = play_single_turn()
-    i += 1
+    turn += 1
