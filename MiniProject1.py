@@ -78,27 +78,37 @@ def select_question(correct_bank):
     return question
 
 def determine_player():
-    rand_turn = random.randint(1,4)
-    if rand_turn == 1:
+    fasest_player= input(print('press 1,2,3 or 4 then enter'))
+    if fasest_player == '1':
         player = 'Player 1'
-    elif rand_turn == 2:
+    elif fasest_player == '2':
         player = 'Player 2'
-    elif rand_turn == 3:
+    elif fasest_player == '3':
         player = 'Player 3'
-    else:
+    elif fasest_player == '4' :
         player = 'Player 4'
+    else:
+        print('error fastest player')
     print('It is', player, '\'s turn')
     return player
+    return fasest_player
 
-def determine_new_player(player):
-    if player == 'Player 1':
-        newplayer = 'Player 2'
-    elif player == 'Player 2':
-        newplayer = 'Player 3'
-    elif player == 'Player 3':
-        newplayer = 'Player 4'
+def determine_new_player(fasest_player):
+    fasest_player_2nd= input(print('press 1,2,3 or 4 then enter for second try'))
+    while (fasest_player[-1] ==fasest_player_2nd):
+      print('the same player cant try twice')
+      fasest_player_2nd= input(print('press 1,2,3 or 4 then enter for second try'))
+    
+    if fasest_player_2nd == '1':
+          newplayer = 'Player 1'
+    elif fasest_player_2nd == '2':
+          newplayer = 'Player 2'
+    elif fasest_player_2nd == '3':
+          newplayer = 'Player 3'
+    elif fasest_player_2nd == '4' :
+          newplayer = 'Player 4'
     else:
-        newplayer = 'Player 1'
+        print('error fastest player 2nd')
     print('It is now', newplayer,'\'s turn to answer')
     return newplayer
 
