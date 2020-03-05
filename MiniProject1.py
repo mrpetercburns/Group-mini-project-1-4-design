@@ -1,6 +1,14 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Mar  4 20:01:54 2020
+
+@author: amand
+"""
+
 import random
 import pandas as pd
 import numpy as np
+import time
 
 df = pd.read_csv('miniqbank.csv')
 
@@ -99,7 +107,17 @@ def display_q(question):
     return
 
 def get_guess():
+    time.sleep(2)
+    current = time.time()
+    limit = current + 10
     guess = input('Answer here:')
+    if time.time() < limit:
+        guess = guess
+    else:
+        guess = 'Not valid'
+        print('\nAnswer Not Accepted. Took too long to answer.')
+        time.sleep(2)
+    guess = guess.lower()
     return guess
 
 def check_answer(user_guess, question):
