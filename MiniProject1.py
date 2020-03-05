@@ -77,8 +77,15 @@ def select_question(correct_bank):
     question = correct_bank.sample(n=1)
     return question
 
-def determine_player():
-    fasest_player= input(print('press 1,2,3 or 4 then enter'))
+def determine_player(num_player):
+    if num_player == '4':
+      fasest_player= input(print('press 1,2,3 or 4 then enter'))
+    elif num_player == '3':
+      fasest_player= input(print('press 1,2 or 3 then enter'))
+    elif num_player == '2':
+     fasest_player= input(print('press 1 or 2 then enter'))
+    else:
+      print ('number of player error from determine player')
     if fasest_player == '1':
         player = 'Player 1'
     elif fasest_player == '2':
@@ -93,11 +100,24 @@ def determine_player():
     return player
     return fasest_player
 
-def determine_new_player(fasest_player):
-    fasest_player_2nd= input(print('press 1,2,3 or 4 then enter for second try'))
-    while (fasest_player[-1] ==fasest_player_2nd):
-      print('the same player cant try twice')
+def determine_new_player(fasest_player, num_player):
+    if num_player == '4':
       fasest_player_2nd= input(print('press 1,2,3 or 4 then enter for second try'))
+      while (fasest_player[-1] ==fasest_player_2nd):
+        print('the same player cant try twice')
+        fasest_player_2nd= input(print('press 1,2,3 or 4 then enter for second try'))
+    elif num_player == '3':
+      fasest_player_2nd= input(print('press 1,2 or 3 then enter for second try'))
+      while (fasest_player[-1] ==fasest_player_2nd):
+        print('the same player cant try twice')
+        fasest_player_2nd= input(print('press 1,2 or 3 then enter for second try'))
+    elif num_player == '2':
+     fasest_player_2nd= input(print('press 1 or 2 then enter for second try'))
+     while (fasest_player[-1] ==fasest_player_2nd):
+        print('the same player cant try twice')
+        fasest_player_2nd= input(print('press 1 or 2 then enter for second try'))
+    else:
+      print ('number of player error from determine player')
     
     if fasest_player_2nd == '1':
           newplayer = 'Player 1'
@@ -461,7 +481,7 @@ def play_single_turn():
             stoploop = 0
     my_q = select_question(my_bank)
     
-    player = determine_player()
+    player = determine_player(num_player)
     
     display_q(my_q)
     print('------------------------------------')
@@ -471,7 +491,7 @@ def play_single_turn():
     give_feedback(valid)
 
     if not valid:
-        newplayer = determine_new_player(player)
+        newplayer = determine_new_player(player,num_player)
         display_q(my_q)
         the_guess = get_guess()
         valid = check_answer(the_guess,my_q)
