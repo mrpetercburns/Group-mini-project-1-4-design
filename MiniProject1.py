@@ -303,16 +303,77 @@ def tie_breaker(player1,player2,player3,player4):
     return orderofplayers
 
 def mini_game(tiebreakers):
+    def mini_game(tiebreakers):
+    # each player will answer the same question
+    print('\nWhat does a rich man need that a poor person has?')
+    answer = 'nothing'
     
+    # The random order makes it fair
+    # first player that answers question correctly wins
+    # if no players answer correctly, no one wins
     if len(tiebreakers) == 4:
-        print(tiebreakers)
-        
+        answer1 = input((tiebreakers[0])+'\'s answer:')
+        answer1 = answer1.lower()
+        if answer1 == answer:
+            print(tiebreakers[0] + ' wins!')
+        else:
+            print('Incorrect!')
+            answer2 = input(tiebreakers[1]+'\'s answer:')
+            answer2 = answer2.lower()
+            if answer2 == answer:
+                print(tiebreakers[1]+'wins!')
+            else:
+                print('Incorrect!')
+                answer3 = input(tiebreakers[2]+'\'s answer:')
+                answer3 = answer3.lower()
+                if answer3 == answer:
+                    print(tiebreakers[2]+' wins!')
+                else:
+                    print('Incorrect!')
+                    answer4 = input(tiebreakers[3]+'\'s answer:')
+                    answer4 = answer4.lower()
+                    if answer4 == answer:
+                        print(tiebreakers[3]+' wins!')
+                    else:
+                        print('Incorrect!')
+                        print('nobody wins!')
+                        print('the correct answer is nothing!')
     elif len(tiebreakers) == 3:
-        print(tiebreakers)
-        
+        answer1 = input((tiebreakers[0])+'\'s answer:')
+        answer1 = answer1.lower()
+        if answer1 == answer:
+            print(tiebreakers[0] + ' wins!')
+        else:
+            print('Incorrect!')
+            answer2 = input(tiebreakers[1]+'\'s answer:')
+            answer2 = answer2.lower()
+            if answer2 == answer:
+                print(tiebreakers[1]+'wins!')
+            else:
+                print('Incorrect!')
+                answer3 = input(tiebreakers[2]+'\'s answer:')
+                answer3 = answer3.lower()
+                if answer3 == answer:
+                    print(tiebreakers[2]+' wins!')
+                else:
+                    print('Incorrect!')
+                    print('nobody wins!')
+                    print('the correct answer is nothing!')
     elif len(tiebreakers) == 2:
-        print(tiebreakers)
-        
+        answer1 = input((tiebreakers[0])+'\'s answer:')
+        answer1 = answer1.lower()
+        if answer1 == answer:
+            print(tiebreakers[0]+' wins!')
+        else:
+            print('Incorrect!')
+            print(tiebreakers[1]+'\'s turn')
+            answer2 = input(tiebreakers[1]+'\'s answer:')
+            answer2 = answer2.lower()
+            if answer2 == answer:
+                print(tiebreakers[1]+' wins!' )
+            else:
+                print('nobody wins!')
+                print('the correct answer is nothing!')
     else:
         tiebreakers = tiebreakers
 
