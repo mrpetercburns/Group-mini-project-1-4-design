@@ -322,15 +322,15 @@ def tie_breaker(player1,player2,player3,player4):
         
     return orderofplayers
 
+
 def mini_game(tiebreakers):
-    def mini_game(tiebreakers):
-    # each player will answer the same question
-    print('\nWhat does a rich man need that a poor person has?')
+# each player will answer the same question
+    print('What does a rich man need that a poor person has?')
     answer = 'nothing'
-    
-    # The random order makes it fair
-    # first player that answers question correctly wins
-    # if no players answer correctly, no one wins
+
+# The random order makes it fair
+# first player that answers question correctly wins
+# if no players answer correctly, no one wins
     if len(tiebreakers) == 4:
         answer1 = input((tiebreakers[0])+'\'s answer:')
         answer1 = answer1.lower()
